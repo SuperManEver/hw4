@@ -1,0 +1,26 @@
+# FOR LOCAL DEVELOPMENT PURPOSES!
+
+version: '3.6'
+services:
+  redis:
+    image: redis:latest
+    ports:
+      - 6379:6379
+    volumes:
+      - ./config/redis.conf:/redis.conf
+    command: ['redis-server', '/redis.conf']
+
+  postgresql:
+    image: postgres:11.2
+    # volumes:
+    #   - db-data:/var/lib/postgres/data
+    # container_name: dashboard-crawler
+    ports:
+      - 5432:5432
+
+    environment:
+      POSTGRES_USER: 'postgres'
+      POSTGRES_PASSWORD: 'postgres'
+      POSTGRES_DB: 'dashboard'
+    volumes:
+      - ../postgres:/var/lib/postgresql/data
